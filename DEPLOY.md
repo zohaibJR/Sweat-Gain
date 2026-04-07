@@ -22,7 +22,9 @@ Environment variables:
 - `JWT_SECRET=your long random secret`
 - `ADMIN_EMAIL=your admin email`
 - `ADMIN_PASSWORD=your admin password`
-- `CORS_ORIGIN=https://sweat-gain.vercel.app`
+- `CORS_ORIGIN=http://localhost:5173,https://sweat-gain.vercel.app`
+
+The backend also accepts `https://sweat-gain-*.vercel.app` preview deployments.
 
 After deploy, copy your backend URL, for example:
 
