@@ -1,0 +1,581 @@
+/* ═══════════════════════════════════════════════
+   Records.css — SweatAndGain
+   Matches navy/blue/cyan theme from Aboutus.jsx
+═══════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap');
+
+:root {
+  --navy:        #0a1628;
+  --navy-mid:    #0f1f3d;
+  --navy-light:  #162847;
+  --blue-accent: #1a6fd4;
+  --blue-bright: #2196f3;
+  --blue-glow:   #4db6ff;
+  --cyan:        #00d4ff;
+  --green:       #00e676;
+  --red:         #ff4444;
+  --white:       #ffffff;
+  --white-70:    rgba(255,255,255,0.7);
+  --white-30:    rgba(255,255,255,0.3);
+  --white-10:    rgba(255,255,255,0.08);
+}
+
+/* ── Page Shell ── */
+.RecordsPage {
+  min-height: 100vh;
+  background: var(--navy);
+  font-family: 'Rajdhani', sans-serif;
+  color: var(--white);
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Animated background grid — same as Aboutus */
+.RecordsPage::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(26,111,212,0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(26,111,212,0.07) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Inner content above bg ── */
+.RecordsPage > *:not(.RecordsPage::before) {
+  position: relative;
+  z-index: 1;
+}
+
+.RecordsInner {
+  position: relative;
+  z-index: 1;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 60px 30px 80px;
+}
+
+/* ── Header ── */
+.RecordsHeader {
+  text-align: center;
+  padding-bottom: 48px;
+  animation: fadeUp 0.7s ease both;
+}
+
+.RecordsBadge {
+  display: inline-block;
+  background: linear-gradient(135deg, rgba(26,111,212,0.3), rgba(0,212,255,0.15));
+  border: 1px solid rgba(0,212,255,0.4);
+  color: var(--cyan);
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  padding: 8px 24px;
+  border-radius: 40px;
+  margin-bottom: 24px;
+}
+
+.RecordsTitle {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(48px, 8vw, 80px);
+  letter-spacing: 4px;
+  color: var(--white);
+  margin: 0 0 6px;
+  line-height: 1;
+  text-shadow: 0 0 60px rgba(33,150,243,0.35);
+}
+
+.RecordsTitle span {
+  color: transparent;
+  -webkit-text-stroke: 2px var(--blue-bright);
+}
+
+.RecordsDivider {
+  width: 80px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--blue-accent), var(--cyan));
+  margin: 20px auto;
+  border-radius: 2px;
+}
+
+.RecordsSubtitle {
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  font-weight: 300;
+  color: var(--white-70);
+  letter-spacing: 0.3px;
+  margin: 0;
+}
+
+/* ── Controls Panel ── */
+.RecordsControls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  align-items: flex-end;
+  background: linear-gradient(135deg, rgba(26,111,212,0.12), rgba(0,212,255,0.05));
+  border: 1px solid rgba(26,111,212,0.3);
+  border-radius: 18px;
+  padding: 24px 28px;
+  margin-bottom: 32px;
+  animation: fadeUp 0.7s 0.1s ease both;
+}
+
+.ControlGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ControlGroup label {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--cyan);
+}
+
+.ControlGroup select,
+.ControlGroup input {
+  background: rgba(10,22,40,0.8);
+  border: 1px solid rgba(26,111,212,0.35);
+  border-radius: 10px;
+  color: var(--white);
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  padding: 10px 16px;
+  outline: none;
+  transition: border-color 0.25s, box-shadow 0.25s;
+  cursor: pointer;
+  min-width: 140px;
+}
+
+.ControlGroup select:focus,
+.ControlGroup input:focus {
+  border-color: var(--cyan);
+  box-shadow: 0 0 0 3px rgba(0,212,255,0.12);
+}
+
+.ControlGroup input::placeholder {
+  color: rgba(255,255,255,0.25);
+}
+
+.SearchGroup input {
+  min-width: 220px;
+}
+
+/* ── Filter Buttons ── */
+.FilterBtns {
+  display: flex;
+  gap: 8px;
+}
+
+.FilterBtn {
+  padding: 10px 18px;
+  border-radius: 10px;
+  border: 1px solid rgba(26,111,212,0.3);
+  background: rgba(10,22,40,0.8);
+  color: var(--white-70);
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.FilterBtn:hover {
+  border-color: var(--blue-bright);
+  color: var(--white);
+}
+
+.FilterBtn.active-all {
+  background: linear-gradient(135deg, var(--blue-accent), var(--blue-bright));
+  border-color: var(--blue-bright);
+  color: var(--white);
+  box-shadow: 0 4px 16px rgba(33,150,243,0.35);
+}
+
+.FilterBtn.active-present {
+  background: rgba(0,230,118,0.12);
+  border-color: var(--green);
+  color: var(--green);
+}
+
+.FilterBtn.active-absent {
+  background: rgba(255,68,68,0.12);
+  border-color: var(--red);
+  color: var(--red);
+}
+
+/* ── Summary Chips ── */
+.RecordsSummary {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+  animation: fadeUp 0.7s 0.2s ease both;
+}
+
+.SummaryChip {
+  border-radius: 16px;
+  padding: 24px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid transparent;
+  transition: transform 0.25s, border-color 0.25s;
+}
+
+.SummaryChip:hover {
+  transform: translateY(-3px);
+}
+
+.chip-total {
+  background: var(--white-10);
+  border-color: rgba(255,255,255,0.1);
+}
+
+.chip-present {
+  background: rgba(0,230,118,0.07);
+  border-color: rgba(0,230,118,0.25);
+}
+
+.chip-absent {
+  background: rgba(255,68,68,0.07);
+  border-color: rgba(255,68,68,0.25);
+}
+
+.chip-rate {
+  background: linear-gradient(135deg, rgba(26,111,212,0.15), rgba(0,212,255,0.07));
+  border-color: rgba(0,212,255,0.3);
+}
+
+.ChipValue {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 40px;
+  line-height: 1;
+  letter-spacing: 1px;
+}
+
+.chip-total   .ChipValue { color: var(--white); }
+.chip-present .ChipValue { color: var(--green); }
+.chip-absent  .ChipValue { color: var(--red); }
+.chip-rate    .ChipValue {
+  background: linear-gradient(135deg, var(--blue-bright), var(--cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.ChipLabel {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--white-70);
+}
+
+/* ── Rate Bar ── */
+.RateBarWrap {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 32px;
+  animation: fadeUp 0.7s 0.25s ease both;
+}
+
+.RateBarTrack {
+  flex: 1;
+  height: 5px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.RateBarFill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--blue-accent), var(--cyan));
+  border-radius: 99px;
+  transition: width 0.9s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 0 10px rgba(0,212,255,0.4);
+}
+
+.RateBarLabel {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: var(--white-70);
+  white-space: nowrap;
+  text-transform: uppercase;
+}
+
+/* ── Table Wrapper ── */
+.RecordsTableWrap {
+  background: linear-gradient(135deg, rgba(15,31,61,0.8), rgba(10,22,40,0.9));
+  border: 1px solid rgba(26,111,212,0.25);
+  border-radius: 18px;
+  overflow: hidden;
+  animation: fadeUp 0.7s 0.3s ease both;
+}
+
+/* ── Loading ── */
+.RecordsLoading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  padding: 70px 20px;
+  color: var(--white-70);
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 1px;
+}
+
+.Spinner {
+  width: 38px;
+  height: 38px;
+  border: 3px solid rgba(26,111,212,0.2);
+  border-top-color: var(--cyan);
+  border-radius: 50%;
+  animation: spin 0.75s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── No Records ── */
+.NoRecords {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 70px 20px;
+  color: var(--white-30);
+  font-family: 'Rajdhani', sans-serif;
+}
+
+.NoRecordsIcon {
+  font-size: 48px;
+  opacity: 0.6;
+}
+
+.NoRecords p {
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  margin: 0;
+}
+
+/* ── Table ── */
+.RecordsTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.RecordsTable thead tr {
+  background: rgba(26,111,212,0.15);
+  border-bottom: 1px solid rgba(26,111,212,0.3);
+}
+
+.RecordsTable th {
+  padding: 16px 20px;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--cyan);
+  text-align: left;
+}
+
+.RecordsTable tbody tr {
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  transition: background 0.18s;
+}
+
+.RecordsTable tbody tr:last-child {
+  border-bottom: none;
+}
+
+.RecordsTable tbody tr:hover {
+  background: rgba(33,150,243,0.07);
+}
+
+.RecordsTable td {
+  padding: 15px 20px;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 15px;
+  vertical-align: middle;
+}
+
+/* Row accent lines */
+.row-present {
+  border-left: 3px solid rgba(0,230,118,0.5);
+}
+
+.row-absent {
+  border-left: 3px solid rgba(255,68,68,0.4);
+}
+
+.RowNum {
+  color: rgba(255,255,255,0.2);
+  font-size: 13px;
+  width: 44px;
+}
+
+.RowDay {
+  color: var(--white-70);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.RowDate {
+  color: var(--white);
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+
+.RowWeight {
+  color: var(--cyan);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.RowWeight span {
+  font-size: 12px;
+  color: var(--white-30);
+  font-weight: 400;
+  margin-left: 2px;
+}
+
+/* ── Status Badge ── */
+.StatusBadge {
+  display: inline-block;
+  padding: 5px 14px;
+  border-radius: 20px;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.badge-present {
+  background: rgba(0,230,118,0.1);
+  color: var(--green);
+  border: 1px solid rgba(0,230,118,0.3);
+}
+
+.badge-absent {
+  background: rgba(255,68,68,0.1);
+  color: var(--red);
+  border: 1px solid rgba(255,68,68,0.3);
+}
+
+/* ── Result Count ── */
+.ResultCount {
+  text-align: right;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  color: var(--white-30);
+  margin-top: 16px;
+  padding-right: 4px;
+}
+
+.ResultCount strong {
+  color: var(--cyan);
+}
+
+/* ── Animations ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ══════════════════
+   RESPONSIVE
+══════════════════ */
+
+@media (max-width: 900px) {
+  .RecordsSummary {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 700px) {
+  .RecordsInner {
+    padding: 36px 16px 60px;
+  }
+
+  .RecordsControls {
+    flex-direction: column;
+    padding: 20px 18px;
+    gap: 16px;
+  }
+
+  .ControlGroup select,
+  .ControlGroup input {
+    min-width: unset;
+    width: 100%;
+  }
+
+  .SearchGroup input {
+    min-width: unset;
+    width: 100%;
+  }
+
+  .FilterBtns {
+    width: 100%;
+  }
+
+  .FilterBtn {
+    flex: 1;
+    text-align: center;
+    padding: 10px 8px;
+    font-size: 13px;
+  }
+
+  .RecordsSummary {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .ChipValue {
+    font-size: 32px;
+  }
+
+  /* Hide Day column on small screens */
+  .RecordsTable th:nth-child(2),
+  .RecordsTable td:nth-child(2) {
+    display: none;
+  }
+
+  .RecordsTable th,
+  .RecordsTable td {
+    padding: 12px 12px;
+  }
+}
+
+@media (max-width: 420px) {
+  .RecordsSummary {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .RecordsTitle {
+    font-size: 48px;
+  }
+}

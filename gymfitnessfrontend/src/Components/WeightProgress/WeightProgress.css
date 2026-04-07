@@ -1,0 +1,12 @@
+/* WeightProgress.css */
+
+.WeightProgress {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+@media (max-width: 768px) {
+  .WeightProgress { grid-template-columns: 1fr; }
+}

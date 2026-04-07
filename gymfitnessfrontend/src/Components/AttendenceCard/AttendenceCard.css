@@ -1,0 +1,26 @@
+/* AttendenceCard.css */
+
+.card-green { --card-glow: rgba(0,230,118,0.15); border-color: rgba(0,230,118,0.2) !important; }
+.card-red   { --card-glow: rgba(255,68,68,0.15);  border-color: rgba(255,68,68,0.2) !important; }
+
+.attendance-icon {
+  --card-icon-bg:     rgba(33,150,243,0.15);
+  --card-icon-border: rgba(33,150,243,0.3);
+}
+
+.card-green .attendance-icon {
+  --card-icon-bg:     rgba(0,230,118,0.15);
+  --card-icon-border: rgba(0,230,118,0.35);
+}
+
+.card-red .attendance-icon {
+  --card-icon-bg:     rgba(255,68,68,0.15);
+  --card-icon-border: rgba(255,68,68,0.35);
+}
+
+.val-green { color: var(--green) !important; }
+.val-red   { color: var(--red) !important; }
+.val-muted { color: var(--white-30) !important; }
+
+.bar-green { background: linear-gradient(90deg, #00e676, #69f0ae) !important; }
+.bar-red   { background: linear-gradient(90deg, #ff4444, #ff7070) !important; }

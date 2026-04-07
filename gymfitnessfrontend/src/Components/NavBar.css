@@ -1,0 +1,242 @@
+/* ============================================================
+   NavBar.css
+   ============================================================ */
+
+.mainDiv {
+  width: 100%;
+  height: 70px;
+  background: rgba(10, 22, 40, 0.96);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(26, 111, 212, 0.3);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 40px;
+  box-sizing: border-box;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+
+/* ── Left side: logo image + brand text ── */
+.navLeft {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+}
+
+/* ============================================================
+   LOGO SIZE CONTROL
+   👉 Change ONLY this value to resize logo everywhere
+   ============================================================ */
+:root {
+  --logo-size: 65px;
+}
+
+.navLogo {
+  width: var(--logo-size);
+  height: var(--logo-size);
+  object-fit: contain;
+  filter: drop-shadow(0 0 8px rgba(33, 150, 243, 0.45));
+  transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+.navLogo:hover {
+  filter: drop-shadow(0 0 14px rgba(0, 212, 255, 0.7));
+  transform: scale(1.06);
+}
+
+.navBrand {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 24px;
+  letter-spacing: 3px;
+  color: #ffffff;
+  text-shadow: 0 0 20px rgba(33, 150, 243, 0.5);
+  white-space: nowrap;
+  line-height: 1;
+}
+
+/* ── Right side: nav links ── */
+.navRight ul {
+  display: flex;
+  gap: 32px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+}
+
+.navRight ul li a {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 1.2px;
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: color 0.2s ease;
+  position: relative;
+}
+
+/* Underline slide-in on hover */
+.navRight ul li a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #1a6fd4, #00d4ff);
+  border-radius: 2px;
+  transition: width 0.25s ease;
+}
+
+.navRight ul li a:hover {
+  color: #00d4ff;
+}
+
+.navRight ul li a:hover::after {
+  width: 100%;
+}
+
+/* ── Logout button ── */
+.logoutBtn {
+  padding: 8px 22px;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  border: 1.5px solid rgba(239, 68, 68, 0.55);
+  border-radius: 50px;
+  background: rgba(239, 68, 68, 0.08);
+  color: #fc8181;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  white-space: nowrap;
+}
+
+.logoutBtn:hover {
+  background: rgba(239, 68, 68, 0.22);
+  border-color: #f87171;
+  color: #ffffff;
+  box-shadow: 0 4px 18px rgba(239, 68, 68, 0.3);
+  transform: translateY(-1px);
+}
+
+/* ── Logout confirmation popup ── */
+.popupOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(6, 14, 30, 0.78);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.popupBox {
+  background: #162847;
+  border: 1px solid rgba(26, 111, 212, 0.35);
+  padding: 44px 52px;
+  border-radius: 22px;
+  text-align: center;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: 0 28px 72px rgba(0, 0, 0, 0.65);
+  animation: popIn 0.2s ease;
+}
+
+@keyframes popIn {
+  from { opacity: 0; transform: scale(0.93) translateY(10px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.popupBox h3 {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: #ffffff;
+  line-height: 1.4;
+}
+
+.popupButtons {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+}
+
+.yesBtn,
+.noBtn {
+  padding: 10px 28px;
+  border-radius: 50px;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.22s ease;
+}
+
+.yesBtn {
+  background: rgba(239, 68, 68, 0.12);
+  border: 1.5px solid rgba(239, 68, 68, 0.5);
+  color: #fc8181;
+}
+
+.yesBtn:hover {
+  background: rgba(239, 68, 68, 0.28);
+  border-color: #f87171;
+  color: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(239, 68, 68, 0.25);
+}
+
+.noBtn {
+  background: linear-gradient(135deg, #1a6fd4, #2196f3);
+  color: #ffffff;
+  border: none;
+  box-shadow: 0 4px 16px rgba(33, 150, 243, 0.3);
+}
+
+.noBtn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 26px rgba(33, 150, 243, 0.5);
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .mainDiv { padding: 0 24px; }
+  .navRight ul { gap: 22px; }
+}
+
+@media (max-width: 768px) {
+  :root { --logo-size: 36px; }
+
+  .mainDiv {
+    flex-direction: column;
+    height: auto;
+    padding: 14px 20px;
+    gap: 14px;
+  }
+
+  .navBrand { font-size: 20px; }
+
+  .navRight ul {
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .navBrand { display: none; }
+  .navRight ul li a { font-size: 13px; }
+}

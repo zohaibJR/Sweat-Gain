@@ -1,0 +1,44 @@
+/* MonthlyAttendence.css */
+
+.card-monthly { --card-glow: rgba(0,212,255,0.12); }
+
+.monthly-icon {
+  --card-icon-bg:     rgba(0,212,255,0.12);
+  --card-icon-border: rgba(0,212,255,0.3);
+}
+
+.val-cyan { color: var(--cyan) !important; }
+.bar-cyan { background: linear-gradient(90deg, var(--blue-accent), var(--cyan)) !important; }
+
+.MonthlyBarWrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 2px;
+}
+
+.MonthlyBarTrack {
+  flex: 1;
+  height: 4px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.MonthlyBarFill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--blue-accent), var(--cyan));
+  border-radius: 99px;
+  transition: width 1s cubic-bezier(0.4,0,0.2,1);
+  box-shadow: 0 0 6px rgba(0,212,255,0.4);
+}
+
+.MonthlyRate {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--cyan);
+  letter-spacing: 0.5px;
+  min-width: 36px;
+  text-align: right;
+}

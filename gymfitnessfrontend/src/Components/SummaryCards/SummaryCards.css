@@ -1,0 +1,21 @@
+/* ============================================================
+   SummaryCards.css
+   ============================================================ */
+.SummaryCardsMain {
+  width: 100%;
+}
+
+.Cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  width: 100%;
+}
+
+@media (max-width: 1024px) {
+  .Cards { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 520px) {
+  .Cards { grid-template-columns: 1fr 1fr; gap: 12px; }
+}

@@ -1,0 +1,9 @@
+/* WeightChange.css */
+
+.card-loss { --card-glow: rgba(0,230,118,0.12); border-color: rgba(0,230,118,0.2) !important; }
+.card-gain { --card-glow: rgba(255,68,68,0.12);  border-color: rgba(255,68,68,0.2) !important; }
+
+.change-icon {
+  --card-icon-bg:     rgba(33,150,243,0.12);
+  --card-icon-border: rgba(33,150,243,0.3);
+}

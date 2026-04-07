@@ -1,0 +1,32 @@
+/* QuickView.css */
+
+.QuickView {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 18px;
+  align-items: start;
+}
+
+.QuickViewRight {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+@media (max-width: 900px) {
+  .QuickView {
+    grid-template-columns: 1fr;
+  }
+  .QuickViewRight {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+  }
+}
+
+@media (max-width: 560px) {
+  .QuickViewRight {
+    grid-template-columns: 1fr;
+  }
+}

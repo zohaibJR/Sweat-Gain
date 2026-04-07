@@ -1,0 +1,40 @@
+/* ============================================================
+   SWEATANDGAIN — UNIFIED THEME CSS
+   Matches About Us page: dark navy + blue + cyan + Bebas Neue
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap');
+
+:root {
+  --navy:        #0a1628;
+  --navy-mid:    #0f1f3d;
+  --navy-light:  #162847;
+  --blue-accent: #1a6fd4;
+  --blue-bright: #2196f3;
+  --blue-glow:   #4db6ff;
+  --cyan:        #00d4ff;
+  --green:       #00e676;
+  --red:         #ef4444;
+  --white:       #ffffff;
+  --white-70:    rgba(255,255,255,0.7);
+  --white-30:    rgba(255,255,255,0.3);
+  --white-10:    rgba(255,255,255,0.08);
+  --card-bg:     rgba(15, 31, 61, 0.72);
+  --card-border: rgba(26,111,212,0.3);
+  --card-hover:  rgba(26,111,212,0.12);
+}
+
+/* ============================================================
+   2. Index.css
+   ============================================================ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--navy);
+  font-family: 'Rajdhani', sans-serif;
+  color: var(--white);
+}

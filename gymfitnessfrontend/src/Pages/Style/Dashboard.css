@@ -1,0 +1,158 @@
+/* ============================================================
+   Dashboard.css — SweatAndGain
+   Navy/blue/cyan theme, grid bg, staggered animations
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap');
+
+:root {
+  --navy:         #0a1628;
+  --navy-mid:     #0f1f3d;
+  --navy-light:   #162847;
+  --blue-accent:  #1a6fd4;
+  --blue-bright:  #2196f3;
+  --blue-glow:    #4db6ff;
+  --cyan:         #00d4ff;
+  --green:        #00e676;
+  --red:          #ff4444;
+  --gold:         #ffd600;
+  --white:        #ffffff;
+  --white-70:     rgba(255,255,255,0.7);
+  --white-30:     rgba(255,255,255,0.3);
+  --white-10:     rgba(255,255,255,0.08);
+  --card-bg:      rgba(15,31,61,0.75);
+  --card-border:  rgba(26,111,212,0.25);
+  --card-hover:   rgba(22,40,71,0.85);
+}
+
+/* ── Page Shell ── */
+.MainDashboard {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  background-color: var(--navy);
+  background-image: url("../PageAssets/dashboardBG3.jpeg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 32px 16px 60px;
+  overflow-x: hidden;
+}
+
+/* Dark overlay */
+.MainDashboard::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(6, 14, 30, 0.78);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  z-index: 0;
+}
+
+/* Grid overlay */
+.MainDashboard::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(26,111,212,0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(26,111,212,0.07) 1px, transparent 1px);
+  background-size: 60px 60px;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.MainDashboard > * {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 1200px;
+}
+
+/* ── Dashboard greeting header ── */
+.DashGreeting {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 28px;
+  padding: 0 4px;
+  animation: fadeUp 0.6s ease both;
+}
+
+.DashGreeting-left h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(38px, 5vw, 58px);
+  letter-spacing: 3px;
+  color: var(--white);
+  line-height: 1;
+  margin: 0;
+  text-shadow: 0 0 40px rgba(33,150,243,0.3);
+}
+
+.DashGreeting-left h1 span {
+  color: var(--cyan);
+}
+
+.DashGreeting-left p {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  color: var(--white-70);
+  margin: 6px 0 0;
+  text-transform: uppercase;
+}
+
+.DashDate {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--cyan);
+  background: rgba(0,212,255,0.08);
+  border: 1px solid rgba(0,212,255,0.25);
+  padding: 8px 18px;
+  border-radius: 30px;
+}
+
+/* ── Section labels ── */
+.SectionLabel {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--cyan);
+  margin-bottom: 14px;
+  padding-left: 4px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.SectionLabel::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(0,212,255,0.3), transparent);
+  max-width: 200px;
+}
+
+/* ── Stagger animations ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(22px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.anim-1 { animation: fadeUp 0.6s 0.05s ease both; }
+.anim-2 { animation: fadeUp 0.6s 0.15s ease both; }
+.anim-3 { animation: fadeUp 0.6s 0.25s ease both; }
+.anim-4 { animation: fadeUp 0.6s 0.35s ease both; }
+.anim-5 { animation: fadeUp 0.6s 0.45s ease both; }

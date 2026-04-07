@@ -1,0 +1,59 @@
+/* ============================================================
+   6. Attendence.css
+   ============================================================ */
+.AttendceMain {
+  position: relative;
+  width: 100%;
+  min-height: calc(100vh - 70px);
+  background-image: url("../PageAssets/dashboardBG3.jpeg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  padding: 30px 20px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.AttendceMain::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(6, 14, 30, 0.72);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  z-index: 1;
+}
+
+.AttendceMain::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(26,111,212,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(26,111,212,0.06) 1px, transparent 1px);
+  background-size: 60px 60px;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.AttendceMain > * {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.AttendceMain h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 48px;
+  letter-spacing: 4px;
+  color: var(--white);
+  text-shadow: 0 0 40px rgba(33,150,243,0.4);
+  text-align: center;
+}

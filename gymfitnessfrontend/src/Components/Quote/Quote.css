@@ -1,0 +1,104 @@
+/* Quote.css */
+
+.MainQuote {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 28px;
+  background: var(--card-bg);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-radius: 50px;
+  border: 1px solid var(--card-border);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+  transition: border-color 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.MainQuote::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: linear-gradient(180deg, var(--blue-accent), var(--cyan));
+  border-radius: 3px 0 0 3px;
+}
+
+.MainQuote:hover {
+  border-color: rgba(33,150,243,0.4);
+}
+
+.QuoteIcon {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 52px;
+  color: rgba(0,212,255,0.2);
+  line-height: 1;
+  flex-shrink: 0;
+  margin-top: -8px;
+}
+
+.QuoteBody {
+  flex: 1;
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  flex-wrap: wrap;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.quote-visible { opacity: 1; transform: translateY(0); }
+.quote-hidden  { opacity: 0; transform: translateY(6px); }
+
+.QuoteText {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 17px;
+  font-weight: 500;
+  color: var(--white-70);
+  font-style: italic;
+  letter-spacing: 0.3px;
+  margin: 0;
+}
+
+.QuoteAuthor {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--cyan);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.QuoteNext {
+  background: rgba(0,212,255,0.08);
+  border: 1px solid rgba(0,212,255,0.2);
+  color: var(--cyan);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all 0.2s;
+}
+
+.QuoteNext:hover {
+  background: rgba(0,212,255,0.18);
+  border-color: var(--cyan);
+  transform: rotate(180deg);
+}
+
+@media (max-width: 768px) {
+  .MainQuote { border-radius: 20px; padding: 18px 20px; }
+  .QuoteText { font-size: 15px; }
+  .QuoteIcon { font-size: 40px; }
+}
+
+@media (max-width: 480px) {
+  .QuoteAuthor { display: none; }
+}
