@@ -26,7 +26,7 @@ Environment variables:
 
 After deploy, copy your backend URL, for example:
 
-- `https://sweatngain-api.onrender.com`
+- `https://sweat-gain.onrender.com`
 
 ## 2. Frontend on Vercel
 
@@ -38,7 +38,7 @@ After deploy, copy your backend URL, for example:
 
 Environment variable:
 
-- `VITE_API_URL=https://your-render-backend.onrender.com`
+- `VITE_API_URL=https://sweat-gain.onrender.com`
 
 ## 3. Important Note About Uploads
 
