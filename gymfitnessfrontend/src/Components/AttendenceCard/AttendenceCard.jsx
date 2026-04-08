@@ -6,6 +6,7 @@ import { apiUrl } from '../../config/api';
 
 function AttendenceCard() {
   const [status, setStatus] = useState(null);
+  const [canCheckIn, setCanCheckIn] = useState(false);
   const email = localStorage.getItem("userEmail");
 
   useEffect(() => {
@@ -15,7 +16,8 @@ function AttendenceCard() {
         const res = await axios.get(
           apiUrl(`/api/attendance/check-today?email=${email}`)
         );
-        setStatus(res.data.marked ? res.data.status : 'Not Marked');
+        setStatus(res.data.status || 'Absent');
+        setCanCheckIn(Boolean(res.data.canCheckIn));
       } catch {
         setStatus('Error');
       }
@@ -25,7 +27,6 @@ function AttendenceCard() {
 
   const isPresent  = status === 'Present';
   const isAbsent   = status === 'Absent';
-  const isUnmarked = status === 'Not Marked' || status === null;
 
   return (
     <div className={`DashboardCard card-attendance ${isPresent ? 'card-green' : isAbsent ? 'card-red' : ''}`}>
@@ -35,7 +36,7 @@ function AttendenceCard() {
         {status === null ? '...' : status}
       </div>
       <div className="CardSub">
-        {isPresent ? 'Great job showing up!' : isAbsent ? 'Marked absent today' : 'Not yet marked'}
+        {isPresent ? 'Great job showing up!' : isAbsent ? (canCheckIn ? 'Auto absent until you check in' : 'Absent record is locked in') : 'Unable to load'}
       </div>
       <div className={`CardBar ${isPresent ? 'bar-green' : isAbsent ? 'bar-red' : ''}`} />
     </div>

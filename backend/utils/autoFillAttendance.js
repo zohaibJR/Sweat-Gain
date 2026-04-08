@@ -1,52 +1,68 @@
 import Attendance from '../models/Attendence.js';
 
-/**
- * Auto-fills missing attendance days between the last recorded day and today.
- *
- * Rules:
- *  - Sunday  → mark as Present  (rest day), carry last known weight
- *  - Mon–Sat → mark as Absent,              carry last known weight
- *
- * Called when a user submits attendance so there are no gaps in their history.
- */
-export const autoFillAbsentDays = async (userId) => {
-  try {
-    const lastAttendance = await Attendance.findOne({ user: userId }).sort({ date: -1 });
-    if (!lastAttendance) return; // No previous record — nothing to backfill
+const EDIT_WINDOW_HOURS = 36;
 
-    const lastDate = new Date(lastAttendance.date);
-    lastDate.setHours(0, 0, 0, 0);
+export const startOfDay = (value = new Date()) => {
+  const date = new Date(value);
+  date.setHours(0, 0, 0, 0);
+  return date;
+};
 
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
+export const endOfDay = (value = new Date()) => {
+  const date = new Date(value);
+  date.setHours(23, 59, 59, 999);
+  return date;
+};
 
-    // Start from the day AFTER the last recorded date
-    let current     = new Date(lastDate);
-    let carryWeight = lastAttendance.weight;
-    current.setDate(current.getDate() + 1);
+export const getEditableUntil = (date) =>
+  new Date(startOfDay(date).getTime() + EDIT_WINDOW_HOURS * 60 * 60 * 1000);
 
-    while (current < today) {
-      const dayOfWeek = current.getDay(); // 0 = Sunday
-      const status    = dayOfWeek === 0 ? 'Present' : 'Absent';
+export const isRecordEditable = (record, now = new Date()) => {
+  if (!record?.editableUntil) return false;
+  return new Date(record.editableUntil) >= now;
+};
 
-      try {
-        await Attendance.create({
-          user:   userId,
-          date:   new Date(current),
-          status,
-          weight: carryWeight,
-        });
-        console.log(`📅 Auto-filled [${status}] for user ${userId} on ${current.toDateString()} — weight: ${carryWeight}kg`);
-      } catch (err) {
-        if (err.code !== 11000) {
-          // 11000 = duplicate key (already exists) — safe to skip
-          console.error(`Auto-fill error on ${current.toDateString()}:`, err.message);
-        }
+const buildAutoAbsentRecord = ({ userId, date, weight }) => ({
+  user: userId,
+  date: startOfDay(date),
+  status: 'Absent',
+  weight,
+  source: 'auto',
+  editableUntil: getEditableUntil(date),
+  checkedInAt: null,
+  exercises: [],
+});
+
+export const ensureAttendanceThroughDate = async (user, targetDate = new Date()) => {
+  const today = startOfDay(targetDate);
+  const signupDate = startOfDay(user.createdAt);
+
+  let lastRecord = await Attendance.findOne({ user: user._id }).sort({ date: -1 });
+  let cursor = lastRecord ? startOfDay(lastRecord.date) : new Date(signupDate);
+  let carryWeight = lastRecord?.weight ?? 0;
+
+  if (lastRecord) {
+    cursor.setDate(cursor.getDate() + 1);
+  }
+
+  while (cursor <= today) {
+    try {
+      const created = await Attendance.create(
+        buildAutoAbsentRecord({ userId: user._id, date: cursor, weight: carryWeight })
+      );
+      carryWeight = created.weight;
+    } catch (error) {
+      if (error.code !== 11000) {
+        throw error;
       }
-
-      current.setDate(current.getDate() + 1);
     }
-  } catch (err) {
-    console.error('autoFillAbsentDays error:', err);
+
+    cursor.setDate(cursor.getDate() + 1);
   }
 };
+
+export const ensureTodayAttendance = async (user) => {
+  await ensureAttendanceThroughDate(user, new Date());
+  return Attendance.findOne({ user: user._id, date: startOfDay(new Date()) });
+};
+

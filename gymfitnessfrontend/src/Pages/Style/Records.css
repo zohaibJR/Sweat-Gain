@@ -320,6 +320,30 @@
   text-transform: uppercase;
 }
 
+.SundayLegend {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 18px;
+  padding: 10px 14px;
+  border-radius: 999px;
+  background: rgba(0,212,255,0.08);
+  border: 1px solid rgba(0,212,255,0.18);
+  color: var(--white-70);
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+}
+
+.SundayDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--cyan);
+  box-shadow: 0 0 12px rgba(0,212,255,0.5);
+}
+
 /* ── Table Wrapper ── */
 .RecordsTableWrap {
   background: linear-gradient(135deg, rgba(15,31,61,0.8), rgba(10,22,40,0.9));
@@ -461,6 +485,44 @@
   margin-left: 2px;
 }
 
+.RecordMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-start;
+}
+
+.SourceBadge {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 10px;
+  border-radius: 999px;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+}
+
+.badge-source-auto {
+  background: rgba(255,68,68,0.08);
+  border: 1px solid rgba(255,68,68,0.24);
+  color: #ff8c8c;
+}
+
+.badge-source-manual {
+  background: rgba(0,212,255,0.08);
+  border: 1px solid rgba(0,212,255,0.24);
+  color: var(--cyan);
+}
+
+.SourceNote {
+  color: rgba(255,255,255,0.48);
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
 /* ── Status Badge ── */
 .StatusBadge {
   display: inline-block;
@@ -561,6 +623,11 @@
   /* Hide Day column on small screens */
   .RecordsTable th:nth-child(2),
   .RecordsTable td:nth-child(2) {
+    display: none;
+  }
+
+  .RecordsTable th:nth-child(5),
+  .RecordsTable td:nth-child(5) {
     display: none;
   }
 

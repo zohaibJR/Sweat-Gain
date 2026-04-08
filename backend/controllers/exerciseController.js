@@ -1,5 +1,6 @@
 import Attendance from '../models/Attendence.js';
 import User       from '../models/user.js';
+import { ensureTodayAttendance } from '../utils/autoFillAttendance.js';
 
 export const EXERCISE_OPTIONS = [
   'Chest', 'Biceps', 'Triceps', 'Legs',
@@ -24,19 +25,17 @@ export const logExercises = async (req, res) => {
     const user = await User.findOne({ email: email.toLowerCase() });
     if (!user) return res.status(404).json({ message: 'User not found' });
 
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
+    const todayRecord = await ensureTodayAttendance(user);
+    if (!todayRecord)
+      return res.status(500).json({ message: 'Unable to prepare attendance record' });
 
-    const record = await Attendance.findOneAndUpdate(
-      { user: user._id, date: today },
-      { exercises },
-      { new: true }
-    );
+    if (todayRecord.status !== 'Present')
+      return res.status(400).json({ message: 'Complete today check-in before logging exercises' });
 
-    if (!record)
-      return res.status(400).json({ message: 'Mark attendance first before logging exercises' });
+    todayRecord.exercises = exercises;
+    await todayRecord.save();
 
-    res.json({ message: 'Exercises logged successfully', exercises: record.exercises });
+    res.json({ message: 'Exercises logged successfully', exercises: todayRecord.exercises });
   } catch (err) {
     console.error('logExercises error:', err);
     res.status(500).json({ message: 'Server error' });

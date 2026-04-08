@@ -5,6 +5,9 @@ const attendanceSchema = new mongoose.Schema({
   date:   { type: Date, required: true },
   status: { type: String, enum: ['Present', 'Absent'], required: true },
   weight: { type: Number, required: true },
+  source: { type: String, enum: ['auto', 'manual'], default: 'auto' },
+  editableUntil: { type: Date, default: null },
+  checkedInAt: { type: Date, default: null },
   exercises: {
     type: [String],
     enum: ['Chest','Biceps','Triceps','Legs','Back','Shoulders','Cardio','Full Body','Arms','Core'],
