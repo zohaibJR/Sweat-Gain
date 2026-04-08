@@ -15,7 +15,11 @@ function Signup() {
   });
 
   const [error, setError] = useState("");
+  const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
+  const [otpLoading, setOtpLoading] = useState(false);
+  const [otpSent, setOtpSent] = useState(false);
+  const [otp, setOtp] = useState("");
 
   // Handle input change
   const handleChange = (e) => {
@@ -32,6 +36,7 @@ function Signup() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
+    setMessage("");
 
     // Client-side validation
     if (!formData.name || !formData.email || !formData.country || !formData.password || !formData.password2) {
@@ -44,16 +49,19 @@ function Signup() {
       return;
     }
 
+    if (!otp.trim()) {
+      setError("Please enter the OTP sent to your email");
+      return;
+    }
+
     setLoading(true);
     try {
       const response = await fetch(apiUrl("/api/users/signup"), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          name: formData.name,
           email: formData.email,
-          country: formData.country,
-          password: formData.password,
+          otp: otp.trim(),
         }),
       });
 
@@ -74,6 +82,50 @@ function Signup() {
     }
   };
 
+  const handleSendOtp = async () => {
+    setError("");
+    setMessage("");
+
+    if (!formData.name || !formData.email || !formData.country || !formData.password || !formData.password2) {
+      setError("Please fill all fields");
+      return;
+    }
+
+    if (formData.password !== formData.password2) {
+      setError("Passwords do not match");
+      return;
+    }
+
+    setOtpLoading(true);
+    try {
+      const response = await fetch(apiUrl("/api/users/signup/request-otp"), {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          country: formData.country,
+          password: formData.password,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        setError(data.message || "Failed to send OTP");
+        return;
+      }
+
+      setOtpSent(true);
+      setMessage(data.message || "OTP sent to your email");
+    } catch (err) {
+      console.error(err);
+      setError("Network error");
+    } finally {
+      setOtpLoading(false);
+    }
+  };
+
   return (
     <div className='LoginMainDiv'>
       <div className='InnerDiv'>
@@ -90,6 +142,12 @@ function Signup() {
           {error && (
             <p style={{ color: "red", fontSize: 14, marginBottom: 10 }}>
               {error}
+            </p>
+          )}
+
+          {message && (
+            <p style={{ color: "#16a34a", fontSize: 14, marginBottom: 10 }}>
+              {message}
             </p>
           )}
 
@@ -134,10 +192,38 @@ function Signup() {
               onChange={handleChange}
             />
 
+            {otpSent && (
+              <input
+                type="text"
+                inputMode="numeric"
+                maxLength={6}
+                placeholder="Enter 6 Digit OTP"
+                value={otp}
+                onChange={(e) => setOtp(e.target.value.replace(/\D/g, ""))}
+              />
+            )}
+
+            {!otpSent && (
+              <button type="button" onClick={handleSendOtp} disabled={otpLoading}>
+                {otpLoading ? "Sending OTP..." : "Send OTP"}
+              </button>
+            )}
+
             <button type="submit" disabled={loading}>
-              {loading ? "Creating..." : "Sign Up"}
+              {loading ? "Creating..." : otpSent ? "Verify OTP & Sign Up" : "Sign Up"}
             </button>
           </form>
+
+          {otpSent && (
+            <div className='SignUpText'>
+              <h4>
+                Didn&apos;t get the code?{" "}
+                <a href="#" onClick={(e) => { e.preventDefault(); handleSendOtp(); }}>
+                  Resend OTP
+                </a>
+              </h4>
+            </div>
+          )}
 
           <div className='SignUpText'>
             <h4>

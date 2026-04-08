@@ -16,6 +16,10 @@ function Login() {
         navigate('/signup')
     }
 
+    const goToForgotPassword = () => {
+        navigate('/forgot-password')
+    }
+
     const handleLogin = async () => {
     try {
         const res = await axios.post(apiUrl("/api/users/login"), {
@@ -65,7 +69,7 @@ function Login() {
                 />
             </div>
 
-            <a href="">Forgot Password</a>
+            <a href="#" onClick={(e) => { e.preventDefault(); goToForgotPassword(); }}>Forgot Password</a>
 
             <button onClick={handleLogin}>Login</button>
 

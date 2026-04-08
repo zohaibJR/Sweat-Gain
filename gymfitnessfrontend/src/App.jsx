@@ -4,6 +4,8 @@ import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-route
 import NavBar from './Components/NavBar';
 import Login          from './Pages/Login';
 import Signup         from './Pages/Signup';
+import ForgotPassword from './Pages/ForgotPassword';
+import ResetPassword  from './Pages/ResetPassword';
 import DashBoard      from './Pages/DashBoard';
 import AttendenceForm from './Components/AttendenceForm/AttendenceForm';
 import Records        from './Pages/Records';
@@ -20,7 +22,7 @@ function ProtectedRoute({ children }) {
 // Hides NavBar on public pages (login / signup / admin)
 function AppContent() {
   const location   = useLocation();
-  const hiddenPaths = ['/', '/signup', '/admin'];
+  const hiddenPaths = ['/', '/signup', '/forgot-password', '/reset-password', '/admin'];
   const showNavBar  = !hiddenPaths.includes(location.pathname.toLowerCase());
 
   return (
@@ -30,6 +32,8 @@ function AppContent() {
         {/* Public */}
         <Route path="/"       element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
 
         {/* Protected */}
         <Route path="/dashboard"  element={<ProtectedRoute><DashBoard /></ProtectedRoute>} />
