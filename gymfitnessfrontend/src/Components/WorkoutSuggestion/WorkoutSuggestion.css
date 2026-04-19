@@ -1,0 +1,151 @@
+.WorkoutSuggestionCard {
+  width: 100%;
+  max-width: 1200px;
+  padding: 28px 30px;
+  border-radius: 24px;
+  background:
+    radial-gradient(circle at top right, rgba(0, 212, 255, 0.18), transparent 32%),
+    linear-gradient(135deg, rgba(12, 24, 43, 0.96), rgba(17, 39, 71, 0.92));
+  border: 1px solid rgba(0, 212, 255, 0.18);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.22);
+}
+
+.WorkoutSuggestionTop {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 22px;
+}
+
+.WorkoutSuggestionEyebrow {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+  margin-bottom: 8px;
+}
+
+.WorkoutSuggestionTitle {
+  margin: 0;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2rem, 4vw, 3.1rem);
+  letter-spacing: 0.06em;
+  color: #ffffff;
+}
+
+.WorkoutSuggestionButton {
+  border: 0;
+  border-radius: 999px;
+  padding: 12px 18px;
+  background: linear-gradient(135deg, #00d4ff, #1a6fd4);
+  color: #081321;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.WorkoutSuggestionButton:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+.WorkoutSuggestionButton:disabled {
+  opacity: 0.7;
+  cursor: wait;
+}
+
+.WorkoutSuggestionState,
+.WorkoutSuggestionError p,
+.WorkoutSuggestionNote,
+.WorkoutSuggestionList li {
+  font-family: 'Rajdhani', sans-serif;
+}
+
+.WorkoutSuggestionState,
+.WorkoutSuggestionError p {
+  margin: 0;
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.WorkoutSuggestionError {
+  padding: 14px 16px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 107, 107, 0.35);
+  background: rgba(255, 107, 107, 0.08);
+}
+
+.WorkoutSuggestionContent {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.WorkoutSuggestionFocusRow {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.WorkoutSuggestionLabel {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.WorkoutSuggestionFocus {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 0 16px;
+  border-radius: 999px;
+  background: rgba(0, 212, 255, 0.14);
+  border: 1px solid rgba(0, 212, 255, 0.3);
+  color: #00d4ff;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.55rem;
+  letter-spacing: 0.08em;
+}
+
+.WorkoutSuggestionList {
+  margin: 0;
+  padding-left: 22px;
+  color: #ffffff;
+}
+
+.WorkoutSuggestionList li {
+  margin-bottom: 10px;
+  font-size: 1.05rem;
+  line-height: 1.5;
+}
+
+.WorkoutSuggestionNote {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.68);
+  font-size: 0.98rem;
+  line-height: 1.6;
+}
+
+@media (max-width: 720px) {
+  .WorkoutSuggestionCard {
+    padding: 22px 20px;
+  }
+
+  .WorkoutSuggestionTop {
+    flex-direction: column;
+  }
+
+  .WorkoutSuggestionButton {
+    width: 100%;
+  }
+}

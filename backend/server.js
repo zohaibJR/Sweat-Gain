@@ -12,6 +12,7 @@ import attendanceRoutes from "./routes/attendanceRoutes.js";
 import exerciseRoutes   from "./routes/exerciseRoutes.js";
 import goalRoutes       from "./routes/goalRoutes.js";
 import paymentRoutes    from "./routes/paymentRoutes.js";
+import aiRoutes         from "./routes/aiRoutes.js";
 
 import './cron/attendanceCron.js';
 
@@ -63,6 +64,7 @@ app.use("/api/attendance", attendanceRoutes);
 app.use("/api/exercises",  exerciseRoutes);
 app.use("/api/goals",      goalRoutes);
 app.use("/api/payment",    paymentRoutes);
+app.use("/api/ai",         aiRoutes);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));

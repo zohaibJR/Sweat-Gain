@@ -3,6 +3,7 @@ import SummaryCards from "../Components/SummaryCards/SummaryCards";
 import WeightProgress from "../Components/WeightProgress/WeightProgress";
 import QuickView from "../Components/QuickView/QuickView";
 import Quote from "../Components/Quote/Quote";
+import WorkoutSuggestion from "../Components/WorkoutSuggestion/WorkoutSuggestion";
 import './Style/Dashboard.css';
 
 function DashBoard() {
@@ -19,8 +20,6 @@ function DashBoard() {
 
   return (
     <div className="MainDashboard">
-
-      {/* ── Greeting Header ── */}
       <div className="DashGreeting">
         <div className="DashGreeting-left">
           <h1>{greeting}, <span>{name}</span> 💪</h1>
@@ -29,29 +28,29 @@ function DashBoard() {
         <div className="DashDate">{dateStr}</div>
       </div>
 
-      {/* ── Summary Cards ── */}
       <div className="anim-1" style={{ width: '100%', maxWidth: '1200px' }}>
         <div className="SectionLabel">Today's Stats</div>
         <SummaryCards />
       </div>
 
-      {/* ── Charts ── */}
       <div className="anim-2" style={{ width: '100%', maxWidth: '1200px', marginTop: '8px' }}>
         <div className="SectionLabel">Progress Charts</div>
         <WeightProgress />
       </div>
 
-      {/* ── Quick View ── */}
       <div className="anim-3" style={{ width: '100%', maxWidth: '1200px', marginTop: '8px' }}>
         <div className="SectionLabel">Quick View</div>
         <QuickView />
       </div>
 
-      {/* ── Quote ── */}
       <div className="anim-4" style={{ width: '100%', maxWidth: '1200px', marginTop: '8px' }}>
-        <Quote />
+        <div className="SectionLabel">AI Recommendation</div>
+        <WorkoutSuggestion />
       </div>
 
+      <div className="anim-5" style={{ width: '100%', maxWidth: '1200px', marginTop: '8px' }}>
+        <Quote />
+      </div>
     </div>
   );
 }
