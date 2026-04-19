@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import { apiUrl } from '../config/api';
+import { syncStoredProStatus } from '../utils/proStatus';
 
 /* ─────────────────────────────────── CSS ─────────────────────────────────── */
 const css = `
@@ -155,7 +156,10 @@ export default function NavBar() {
     if (!email) return;
     // Check Pro status
     axios.get(apiUrl(`/api/payment/status?email=${email}`))
-      .then(r => setIsPro(r.data.isPro))
+      .then(r => {
+        setIsPro(r.data.isPro);
+        syncStoredProStatus(r.data);
+      })
       .catch(() => {});
     // Check admin token
     const adminToken = localStorage.getItem('adminToken');
@@ -167,6 +171,7 @@ export default function NavBar() {
     localStorage.removeItem('userEmail');
     localStorage.removeItem('token');
     localStorage.removeItem('adminToken');
+    localStorage.removeItem('isPro');
     // Hard redirect → forces React to re-read localStorage from scratch
     window.location.href = '/';
   };

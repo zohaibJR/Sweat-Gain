@@ -6,6 +6,11 @@ const UserSchema = new mongoose.Schema({
   country:          { type: String, required: true, trim: true },
   password:         { type: String, required: true },
   isPro:            { type: Boolean, default: false },
+  proActivatedAt:   { type: Date, default: null },
+  proExpiresAt:     { type: Date, default: null },
+  proSource:        { type: String, enum: ['trial', 'payment', 'manual'], default: null },
+  trialStartedAt:   { type: Date, default: null },
+  trialUsed:        { type: Boolean, default: false },
   isAdmin:          { type: Boolean, default: false },
 }, { timestamps: true });
 

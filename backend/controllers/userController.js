@@ -1,5 +1,6 @@
 import User from '../models/user.js';
 import bcrypt from 'bcrypt';
+import { buildProStatus, syncUserProStatus } from '../utils/proStatus.js';
 
 // ------------------- SIGNUP -------------------
 export const signupUser = async (req, res) => {
@@ -47,12 +48,29 @@ export const loginUser = async (req, res) => {
       return res.status(400).json({ message: 'Invalid email or password' });
     }
 
+    await syncUserProStatus(user);
+
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
       return res.status(400).json({ message: 'Invalid email or password' });
     }
 
-    res.status(200).json({ success: true, user: { id: user._id, name: user.name, email: user.email, country: user.country, isPro: user.isPro } });
+    const proStatus = buildProStatus(user);
+
+    res.status(200).json({
+      success: true,
+      user: {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+        country: user.country,
+        isPro: proStatus.isPro,
+        proSource: proStatus.proSource,
+        proExpiresAt: proStatus.proExpiresAt,
+        trialUsed: proStatus.trialUsed,
+        trialDaysLeft: proStatus.trialDaysLeft,
+      }
+    });
 
   } catch (error) {
     console.error('Login Error:', error);

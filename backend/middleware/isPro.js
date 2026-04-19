@@ -1,4 +1,5 @@
 import User from '../models/user.js';
+import { syncUserProStatus } from '../utils/proStatus.js';
 
 const isPro = async (req, res, next) => {
   try {
@@ -6,6 +7,7 @@ const isPro = async (req, res, next) => {
     if (!email) return res.status(400).json({ message: "Email required" });
     const user = await User.findOne({ email: email.toLowerCase() });
     if (!user) return res.status(404).json({ message: "User not found" });
+    await syncUserProStatus(user);
     if (!user.isPro) return res.status(403).json({ message: "Pro subscription required", requiresPro: true });
     req.user = user;
     next();

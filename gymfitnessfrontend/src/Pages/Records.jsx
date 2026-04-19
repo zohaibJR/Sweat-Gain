@@ -2,6 +2,7 @@ import React, { useEffect, useState, useCallback } from 'react';
 import axios from 'axios';
 import './Style/Records.css';
 import { API_BASE_URL, apiUrl } from '../config/api';
+import { syncStoredProStatus } from '../utils/proStatus';
 
 const MONTHS = [
   'January','February','March','April','May','June',
@@ -35,8 +36,8 @@ function BarChart({ data, color }) {
 
 function Records() {
   const email = localStorage.getItem('userEmail');
-  const isPro = localStorage.getItem('isPro') === 'true';
   const now   = new Date();
+  const [isPro, setIsPro] = useState(false);
 
   const [selectedMonth, setSelectedMonth] = useState(now.getMonth());
   const [selectedYear,  setSelectedYear]  = useState(now.getFullYear());
@@ -86,6 +87,17 @@ function Records() {
     } catch (err) { console.error(err); }
     finally { setExLoading(false); }
   }, [email, isPro, exRange]);
+
+  useEffect(() => {
+    if (!email) return;
+
+    axios.get(apiUrl(`/api/payment/status?email=${email}`))
+      .then((res) => {
+        setIsPro(res.data.isPro);
+        syncStoredProStatus(res.data);
+      })
+      .catch(() => setIsPro(false));
+  }, [email]);
 
   useEffect(() => { if (email) fetchRecords(); }, [fetchRecords]);
   useEffect(() => { if (email && isPro) fetchExerciseData(); }, [fetchExerciseData]);

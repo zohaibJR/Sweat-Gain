@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { apiUrl } from '../config/api';
+import { syncStoredProStatus } from '../utils/proStatus';
 
 /* ─────────────────────────────────── CSS ─────────────────────────────────── */
 const css = `
@@ -114,6 +115,7 @@ export default function GoalTracker() {
     axios.get(apiUrl(`/api/payment/status?email=${email}`))
       .then(r => {
         setIsPro(r.data.isPro);
+        syncStoredProStatus(r.data);
         if (r.data.isPro) fetchGoal();
         else setLoading(false);
       })

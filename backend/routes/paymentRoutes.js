@@ -3,6 +3,7 @@ import upload from '../middleware/upload.js';
 import verifyAdminToken from '../middleware/verifyAdminToken.js';
 import {
   submitPayment,
+  startProTrial,
   getMyPaymentStatus,
   getAllPaymentRequests,
   approvePayment,
@@ -21,6 +22,7 @@ router.post('/admin/login', adminLogin);
 
 // ── User routes ──
 router.post('/submit',  upload.single('screenshot'), submitPayment);
+router.post('/trial/start', startProTrial);
 router.get('/status',   getMyPaymentStatus);
 
 // ── Admin protected routes ──
