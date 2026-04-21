@@ -310,7 +310,7 @@ export default function Pricing() {
               <div className="PopTag">Most Popular</div>
               <div className="CPlan CPlan-pro">Pro</div>
               <div className="CPriceRow">
-                <span className="CPriceAmt CPriceAmt-pro">Rs 1,500</span>
+                <span className="CPriceAmt CPriceAmt-pro">Rs 399</span>
                 <span className="CPricePer">/ month</span>
               </div>
               <p className="CDesc">Advanced workout tracking, analytics, goals, and premium insights.</p>
@@ -361,7 +361,7 @@ export default function Pricing() {
 
               <div className="Steps">
                 {[
-                  { n: 1, t: 'Send Payment via SadaPay', d: 'Send Rs 1,500 to the SadaPay account shown below.' },
+                  { n: 1, t: 'Send Payment via SadaPay', d: 'Send Rs 399 to the SadaPay account shown below.' },
                   { n: 2, t: 'Take a Screenshot', d: 'Capture a clear screenshot of the successful transaction.' },
                   { n: 3, t: 'Submit Your Screenshot', d: 'Click "Upgrade to Pro", upload the screenshot, and submit it.' },
                   { n: 4, t: 'Get Approved', d: 'Admin reviews your request and activates paid Pro access.' },
@@ -384,7 +384,7 @@ export default function Pricing() {
                 </div>
                 <div>
                   <div className="SadaAmtLbl">Monthly Fee</div>
-                  <div className="SadaAmtVal">1,500</div>
+                  <div className="SadaAmtVal">399</div>
                   <div className="SadaAmtSub">PKR / month</div>
                 </div>
               </div>
@@ -429,7 +429,7 @@ export default function Pricing() {
 
               {!showUpload && canUpload && payStatus !== 'rejected' && (
                 <button className="SubBtn" style={{ marginTop: 0 }} onClick={() => setShowUpload(true)}>
-                  Upgrade to Pro - Rs 1,500/mo
+                  Upgrade to Pro - Rs 399/mo
                 </button>
               )}
             </div>
